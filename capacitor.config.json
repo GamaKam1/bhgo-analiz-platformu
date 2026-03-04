@@ -1,0 +1,6 @@
+{
+  "appId": "com.bhgo.sinavanaliz",
+  "appName": "BHGO Sınav Analiz",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BHGO Sınav Analiz</string>
+    <string name="title_activity_main">BHGO Sınav Analiz</string>
+    <string name="package_name">com.bhgo.analizplatformu</string>
+    <string name="custom_url_scheme">com.bhgo.analizplatformu</string>
+</resources>

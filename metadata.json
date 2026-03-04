@@ -1,0 +1,5 @@
+{
+  "name": "BHGO Sınav Analiz Platformu",
+  "description": "Bolvadin Hasan Gemici Ortaokulu için geliştirilmiş, öğrenci numarası ile LGS sınav sonuçlarını, puanlarını ve sıralamalarını sorgulama ve görüntüleme uygulaması.",
+  "requestFramePermissions": []
+}
