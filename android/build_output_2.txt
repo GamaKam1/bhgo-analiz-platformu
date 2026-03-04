@@ -1,0 +1,17 @@
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'C:\Users\SAME\Desktop\BHGO Analiz Platformu\android\build.gradle' line: 30
+
+* What went wrong:
+A problem occurred evaluating root project 'android'.
+> Could not find method java() for arguments [build_b435evbedaqc0crmmzcym58g4$_run_closure1$_closure5@113c7cca] on root project 'android' of type org.gradle.api.Project.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1s

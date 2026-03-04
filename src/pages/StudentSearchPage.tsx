@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { SearchForm } from '@/components/SearchForm';
-import { TransposedExamResultTable } from '@/components/TransposedExamResultTable';
 import { ExamResultTable } from '@/components/ExamResultTable';
 import { ExamResult } from '@/types';
 import { supabase } from '@/lib/supabase';
@@ -21,7 +20,6 @@ export function StudentSearchPage() {
   const [searchedNumber, setSearchedNumber] = useState<string>('');
   const [hasSearched, setHasSearched] = useState(false);
   const [viewMode, setViewMode] = useState<'table' | 'chart'>('table');
-  const [tableOrientation, setTableOrientation] = useState<'vertical' | 'horizontal'>('vertical');
 
   const { settings, updateSettings, resetSettings, isOpen, setIsOpen } = useSettings();
 
@@ -105,28 +103,7 @@ export function StudentSearchPage() {
             Sütun: <span className="font-mono text-slate-600">{settings.columnMapping.student_number}</span>
           </div>
 
-          <div className="flex justify-center mt-6">
-            <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-sm">
-              <button
-                onClick={() => setTableOrientation('horizontal')}
-                className={cn(
-                  "px-4 py-2 rounded-lg text-sm font-semibold transition-all",
-                  tableOrientation === 'horizontal' ? "bg-white text-slate-800 shadow-sm" : "text-slate-500 hover:text-slate-700"
-                )}
-              >
-                Yatay Tablo
-              </button>
-              <button
-                onClick={() => setTableOrientation('vertical')}
-                className={cn(
-                  "px-4 py-2 rounded-lg text-sm font-semibold transition-all",
-                  tableOrientation === 'vertical' ? "bg-white text-slate-800 shadow-sm" : "text-slate-500 hover:text-slate-700"
-                )}
-              >
-                Dikey Tablo
-              </button>
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -212,11 +189,7 @@ export function StudentSearchPage() {
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {tableOrientation === 'horizontal' ? (
-                    <ExamResultTable results={results} />
-                  ) : (
-                    <TransposedExamResultTable results={results} />
-                  )}
+                  <ExamResultTable results={results} />
                 </motion.div>
               ) : (
                 <motion.div

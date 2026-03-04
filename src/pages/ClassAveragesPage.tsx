@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { TransposedExamResultTable } from '@/components/TransposedExamResultTable';
 import { ExamResultTable } from '@/components/ExamResultTable';
 import { ExamResult } from '@/types';
 import { supabase } from '@/lib/supabase';
@@ -23,7 +22,6 @@ export function ClassAveragesPage() {
   const [gradeFilter, setGradeFilter] = useState<string>('all');
   const [comparisonViewMode, setComparisonViewMode] = useState<'table' | 'chart'>('table');
   const [classViewModes, setClassViewModes] = useState<Record<string, 'table' | 'chart'>>({});
-  const [tableOrientation, setTableOrientation] = useState<'vertical' | 'horizontal'>('vertical');
   const [loading, setLoading] = useState(false);
   const [loadingData, setLoadingData] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -321,27 +319,8 @@ export function ClassAveragesPage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-            <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-sm">
-              <button
-                onClick={() => setTableOrientation('horizontal')}
-                className={cn(
-                  "px-4 py-2 rounded-lg text-sm font-semibold transition-all",
-                  tableOrientation === 'horizontal' ? "bg-white text-slate-800 shadow-sm" : "text-slate-500 hover:text-slate-700"
-                )}
-              >
-                Yatay Tablo
-              </button>
-              <button
-                onClick={() => setTableOrientation('vertical')}
-                className={cn(
-                  "px-4 py-2 rounded-lg text-sm font-semibold transition-all",
-                  tableOrientation === 'vertical' ? "bg-white text-slate-800 shadow-sm" : "text-slate-500 hover:text-slate-700"
-                )}
-              >
-                Dikey Tablo
-              </button>
-            </div>
+          <div className="flex items-center justify-center mt-6">
+
             {(selectedExam || selectedClasses.length > 0) && (
               <button
                 onClick={() => { setSelectedExam(''); setSelectedClasses([]); setResultsByClass({}); setExamComparisonResults([]); }}
@@ -461,11 +440,7 @@ export function ClassAveragesPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                 >
-                  {tableOrientation === 'horizontal' ? (
-                    <ExamResultTable results={filteredComparisonResults} />
-                  ) : (
-                    <TransposedExamResultTable results={filteredComparisonResults} />
-                  )}
+                  <ExamResultTable results={filteredComparisonResults} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -582,11 +557,7 @@ export function ClassAveragesPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                       >
-                        {tableOrientation === 'horizontal' ? (
-                          <ExamResultTable results={resultsByClass[cls]} />
-                        ) : (
-                          <TransposedExamResultTable results={resultsByClass[cls]} />
-                        )}
+                        <ExamResultTable results={resultsByClass[cls]} />
                       </motion.div>
                     ) : (
                       <motion.div
