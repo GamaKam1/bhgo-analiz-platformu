@@ -9,7 +9,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { StudentSearchPage } from './pages/StudentSearchPage';
 import { ClassAveragesPage } from './pages/ClassAveragesPage';
 import { ExamResultsPage } from './pages/ExamResultsPage';
+import { LoginPage } from './pages/LoginPage';
 import { App as CapApp } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 
 import { offlineManager } from './lib/offlineManager';
 import { useSettings } from './hooks/useSettings';
@@ -29,6 +31,19 @@ function App() {
   const [syncError, setSyncError] = useState<string | null>(null);
   const [isInStudentDetail, setIsInStudentDetail] = useState(false);
   const examResultsBackRef = useRef<(() => void) | null>(null);
+
+  // Auth State
+  const isNative = Capacitor.isNativePlatform();
+  const [isAuthenticated, setIsAuthenticated] = useState(isNative || !!localStorage.getItem('bhgo_authenticated'));
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem('bhgo_authenticated', 'true');
+  };
+
+  if (!isAuthenticated) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
 
   useEffect(() => {
     const backListener = CapApp.addListener('backButton', ({ canGoBack }) => {
